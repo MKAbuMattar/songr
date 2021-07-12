@@ -1,6 +1,17 @@
 package com.mk.songr.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class AlbumModel {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+
   private String title;
   private String artist;
   private int songCount;
@@ -17,6 +28,13 @@ public class AlbumModel {
     this.songCount = songCount;
     this.length = length;
     this.imageUrl = imageUrl;
+  }
+
+  public AlbumModel(String title, String artist, int songCount, int length, String imageUrl) {
+  }
+
+  public long getId() {
+    return id;
   }
 
   public String getTitle() {

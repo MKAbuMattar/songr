@@ -1,20 +1,47 @@
 package com.mk.songr.Controller;
 
 import com.mk.songr.model.AlbumModel;
+import com.mk.songr.model.AlbumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Controller
 public class AlbumController {
 
+  @Autowired
+  AlbumRepository albumsRepository;
+
   @GetMapping("/albums")
   public String albums(Model model) {
-    AlbumModel theEminemShow = new AlbumModel("The Eminem Show", "Eminem", 20, "1 hr 17 min", "https://i.scdn.co/image/ab67616d00001e026ca5c90113b30c3c43ffb8f4");
-    AlbumModel recovery = new AlbumModel("Recovery", "Eminem", 17, "1 hr 17 min", "https://i.scdn.co/image/ab67616d00001e02c08d5fa5c0f1a834acef5100");
-    AlbumModel kamikaze = new AlbumModel("Kamikaze", "Eminem", 13, "45 min 55 sec", "https://i.scdn.co/image/ab67616d00001e02e4073def0c03a91e3fceaf73");
-    AlbumModel[] albums = {theEminemShow, recovery, kamikaze};
+    List<AlbumModel> albums = albumsRepository.findAll();
     model.addAttribute("albums", albums);
     return "albums";
   }
+
+  @PostMapping("/albums")
+  public RedirectView postAlbum(String title, String artist, int songCount, String length, String imageUrl) {
+    AlbumModel album = new AlbumModel(title, artist, songCount, length, imageUrl);
+    albumsRepository.save(album);
+    return new RedirectView("/albums");
+  }
+
+//  @DeleteMapping("/albums/{id}")
+//  public String deleteAlbum(@PathVariable String id, Model model) {
+//    AlbumModel albums = albumsRepository.delete(Long.parseLong(id));
+//    model.addAttribute("albums", albums);
+//    return "albums";
+//  }
+
+//  @PostMapping("/albums")
+//  public String addAlbum(@ModelAttribute AlbumModel album, Model model) {
+//    AlbumModel albums = albumsRepository.save(album);
+//    albumsRepository.save(albums);
+//    model.addAttribute("albums", albums);
+//    return "result";
+//  }
 }

@@ -12,18 +12,7 @@
 
 <body>
   <header>
-    <nav class="navbar">
-      <span class="navbarToggle" id="navbarToggle">
-        <i class="menuIcon"></i>
-      </span>
-      <a th:href="@{/}" class="logo">Songr</a>
-      <ul class="main" id="menu">
-        <li><a th:href="@{/}" class="menuLink">Home</a></li>
-        <li><a th:href="@{/hello}" class="menuLink">Hello</a></li>
-        <li><a th:href="@{/capitalize/test text}" class="menuLink">capitalized</a></li>
-        <li><a th:href="@{/albums}" class="menuLink">albums</a></li>
-      </ul>
-    </nav>
+    <nav th:replace="fragments/fragments :: nav"></nav>
     <section class="hero">
       <div class="heroImgBox">
         <img class="heroImg" th:src="@{/assets/img/capitalize-banner.jpg}" alt="Banner Image">

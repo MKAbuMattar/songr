@@ -12,18 +12,7 @@
 
 <body>
   <header>
-    <nav class="navbar">
-      <span class="navbarToggle" id="navbarToggle">
-        <i class="menuIcon"></i>
-      </span>
-      <a th:href="@{/}" class="logo">Songr</a>
-      <ul class="main" id="menu">
-        <li><a th:href="@{/}" class="menuLink">Home</a></li>
-        <li><a th:href="@{/hello}" class="menuLink">Hello</a></li>
-        <li><a th:href="@{/capitalize/test text}" class="menuLink">capitalized</a></li>
-        <li><a th:href="@{/albums}" class="menuLink">albums</a></li>
-      </ul>
-    </nav>
+    <nav th:replace="fragments/fragments :: nav"></nav>
     <section class="hero">
       <div class="heroImgBox">
         <img class="heroImg" th:src="@{/assets/img/albums-banner.jpg}" alt="Banner Image">
@@ -35,8 +24,37 @@
     </section>
   </header>
 
-  <main>
-    <section class="albums">
+  <main class="albums">
+    <section>
+      <div class="tab-btn">
+        <ul class="group-btn">
+          <li class="tab active" id="albumsTab">
+            <button class="btntab tab-btn" id="albumsBtn">Albums</button>
+          </li>
+          <li class="tab" id="addAlbumTab">
+            <button class="btntab tab-btn" id="addAlbumBtn">Add Album</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="addAlbum" class="hide">
+      <form th:action="@{/albums}" method="POST" class="boxForm">
+        <label>Title:</label>
+        <input type="text" name="title" placeholder="" required />
+        <label>Artist:</label>
+        <input type="text" name="artist"  placeholder="" required />
+        <label>Song Count:</label>
+        <input type="number" name="songCount"  placeholder="" required />
+        <label>Length:</label>
+        <input type="text" name="length"  placeholder="" required />
+        <label>Image URL:</label>
+        <input type="text" name="imageUrl"  placeholder="" required />
+        <input type="submit" name="submit" class="btn btnSubmit">
+      </form>
+    </section>
+
+    <section id="albums" class="">
       <section class="cards">
         <div th:each="album : ${albums}" class="card">
           <img th:alt="${album.title}" th:src="${album.imageUrl}">
@@ -50,8 +68,8 @@
       </section>
     </section>
   </main>
-
-  <script th:src="@{/assets/js/mainToggle.js}"></script>
+  <div class="whiteSpace"></div>
+  <script th:src="@{/assets/js/main.js}"></script>
 </body>
 
 </html>

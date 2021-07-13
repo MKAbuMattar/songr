@@ -1,11 +1,13 @@
 package com.mk.songr.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "album")
+@JsonIgnoreProperties(value = { "songs" })
 public class AlbumModel {
 
   @Id
@@ -17,6 +19,9 @@ public class AlbumModel {
   private int songCount;
   private String length;
   private String imageUrl;
+
+  @OneToMany
+  private List<SongModel> songs;
 
   public AlbumModel(){
 
@@ -41,39 +46,47 @@ public class AlbumModel {
     return title;
   }
 
-  public String getArtist() {
-    return artist;
-  }
-
-  public int getSongCount() {
-    return songCount;
-  }
-
-  public String getLength() {
-    return length;
-  }
-
-  public String getImageUrl() {
-    return imageUrl;
-  }
-
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public String getArtist() {
+    return artist;
   }
 
   public void setArtist(String artist) {
     this.artist = artist;
   }
 
+  public int getSongCount() {
+    return songCount;
+  }
+
   public void setSongCount(int songCount) {
     this.songCount = songCount;
+  }
+
+  public String getLength() {
+    return length;
   }
 
   public void setLength(String length) {
     this.length = length;
   }
 
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
+  }
+
+  public List<SongModel> getSongs() {
+    return songs;
+  }
+
+  public void setSongs(List<SongModel> songs) {
+    this.songs = songs;
   }
 }

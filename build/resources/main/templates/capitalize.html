@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/assets/style/normalize.css}">
+  <link rel="stylesheet" th:href="@{/assets/style/main.css}">
+  <title>capitalized</title>
+</head>
+
+<body>
+  <header>
+    <nav th:replace="fragments/fragments :: nav"></nav>
+    <section class="hero">
+      <div class="heroImgBox">
+        <img class="heroImg" th:src="@{/assets/img/capitalize-banner.jpg}" alt="Banner Image">
+      </div>
+      <div class="heroOverlay"></div>
+      <div class="heroTextBox">
+        <h1 class="heroTitle">Capitalized</h1>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="capitalized">
+      <p th:text="'This Word is Capitalized: ' + ${text}"></p>
+    </section>
+  </main>
+
+  <script th:src="@{/assets/js/mainToggle.js}"></script>
+</body>
+
+</html>

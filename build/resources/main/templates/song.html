@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/assets/style/normalize.css}">
+  <link rel="stylesheet" th:href="@{/assets/style/main.css}">
+  <title>Add Song</title>
+</head>
+
+<body>
+
+  <header>
+    <nav th:replace="fragments/fragments :: nav"></nav>
+    <section class="hero">
+      <div class="heroImgBox">
+        <img class="heroImg" th:src="@{/assets/img/albums-banner.jpg}" alt="Banner Image">
+      </div>
+      <div class="heroOverlay"></div>
+      <div class="heroTextBox">
+        <h1 class="heroTitle">These Three Albums</h1>
+      </div>
+    </section>
+  </header>
+
+  <div class="whiteSpace"></div>
+
+  <main>
+
+    <section id="albums" class="">
+      <section class="cards">
+        <div class="card">
+          <img th:alt="${album.title}" th:src="${album.imageUrl}">
+          <div class="cardInfo">
+            <p th:text="'Album Title: ' + ${album.title}"></p>
+            <p th:text="'Artist: ' + ${album.artist}"></p>
+            <p th:text="'Number of Songs: ' + ${album.songCount}"></p>
+            <p th:text="'Album Length: ' + ${album.length}"></p>
+            <a th:href="'song/' + ${album.id}" th:text="'Add New Song to ' + ${album.title}"></a>
+          </div>
+          <ol>
+            <li th:each="song: ${album.songs}">
+              <p th:text="${song.title} + ': ' + ${song.length} + ' seconds'"></p>
+            </li>
+          </ol>
+          <form action="/song/addSong/" method="POST">
+            <label>Album Title:</label>
+            <input type="text" name="album" th:value="${album.title}" required readonly>
+            <label>Title:</label>
+            <input type="text" name="title" required>
+            <label>Length:</label>
+            <input type="number" name="length" required>
+            <label>Track Number:</label>
+            <input type="number" name="trackNumber" required>
+            <input type="submit" name="submit">
+          </form>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <div class="whiteSpace"></div>
+  <script th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

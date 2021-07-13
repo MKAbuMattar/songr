@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fragments</title>
+</head>
+
+<body>
+  <nav th:fragment="nav" class="navbar">
+    <span class="navbarToggle" id="navbarToggle">
+      <i class="menuIcon"></i>
+    </span>
+    <a th:href="@{/}" class="logo">Songr</a>
+    <ul class="main" id="menu">
+      <li><a th:href="@{/}" class="menuLink">Home</a></li>
+      <li><a th:href="@{/hello}" class="menuLink">Hello</a></li>
+      <li><a th:href="@{/capitalize/test text}" class="menuLink">capitalized</a></li>
+      <li><a th:href="@{/albums}" class="menuLink">albums</a></li>
+    </ul>
+  </nav>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 package com.mk.songr.Controller;
 
-import com.mk.songr.model.AlbumModel;
-import com.mk.songr.model.SongModel;
+import com.mk.songr.model.Album;
+import com.mk.songr.model.Song;
 import com.mk.songr.repository.AlbumRepository;
 import com.mk.songr.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +25,17 @@ public class SongController {
 
     @GetMapping("/song/{id}")
     public String album(@PathVariable String id, Model model) {
-        AlbumModel album = albumsRepository.getById(Long.parseLong(id));
+        Album album = albumsRepository.getById(Long.parseLong(id));
         model.addAttribute("album", album);
         return "song";
     }
 
-    @PostMapping("/albums/addSong")
-    public RedirectView addSongToAlbums(String album,String title, int length, int trackNumber) {
-        List<AlbumModel> songAlbum = albumsRepository.findByTitle(album);
-        SongModel newSong = new SongModel(title, length, trackNumber, songAlbum.get(0));
-        songRepository.save(newSong);
-        return new RedirectView("/albums");
-    }
-
     @PostMapping("/song/addSong")
     public RedirectView addSongToAlbum(String album, String title, int length, int trackNumber) {
-        List<AlbumModel> songAlbum = albumsRepository.findByTitle(album);
-        SongModel newSong = new SongModel(title, length, trackNumber, songAlbum.get(0));
+        List<Album> songAlbum = albumsRepository.findByTitle(album);
+        Song newSong = new Song(title, length, trackNumber, songAlbum.get(0));
         songRepository.save(newSong);
-        List<SongModel> song = songRepository.findByTitleAndAlbum(
+        List<Song> song = songRepository.findByTitleAndAlbum(
                 newSong.getTitle(),
                 newSong.getAlbum()
         );

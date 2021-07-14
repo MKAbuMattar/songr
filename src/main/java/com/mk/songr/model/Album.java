@@ -1,14 +1,11 @@
 package com.mk.songr.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "album")
-@JsonIgnoreProperties(value = { "songs" })
-public class AlbumModel {
+public class Album {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +17,14 @@ public class AlbumModel {
   private String length;
   private String imageUrl;
 
-  @OneToMany
-  private List<SongModel> songs;
+  @OneToMany(mappedBy = "album")
+  private List<Song> songs;
 
-  public AlbumModel(){
+  public Album(){
 
   }
 
-  public AlbumModel(String title, String artist, int songCount, String length, String imageUrl) {
+  public Album(String title, String artist, int songCount, String length, String imageUrl) {
     this.title = title;
     this.artist = artist;
     this.songCount = songCount;
@@ -35,7 +32,7 @@ public class AlbumModel {
     this.imageUrl = imageUrl;
   }
 
-  public AlbumModel(String title, String artist, int songCount, int length, String imageUrl) {
+  public Album(String title, String artist, int songCount, int length, String imageUrl) {
   }
 
   public long getId() {
@@ -82,11 +79,11 @@ public class AlbumModel {
     this.imageUrl = imageUrl;
   }
 
-  public List<SongModel> getSongs() {
+  public List<Song> getSongs() {
     return songs;
   }
 
-  public void setSongs(List<SongModel> songs) {
+  public void setSongs(List<Song> songs) {
     this.songs = songs;
   }
 }

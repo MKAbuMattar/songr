@@ -70,13 +70,6 @@
               <p th:text="${song.title} + ': ' + ${song.length} + ' seconds'"></p>
             </li>
           </ol>
-          <form action="/albums/addSong" method="POST">
-            <label>Title:<input type="text" name="title" required></label>
-            <label>Length:<input type="number" name="length" required></label>
-            <label>Track Number:<input type="number" name="trackNumber" required></label>
-            <input type="hidden" name="album" th:value="${album.title}" required>
-            <input type="submit" name="submit">
-          </form>
         </div>
       </section>
     </section>

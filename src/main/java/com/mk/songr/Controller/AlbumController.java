@@ -1,7 +1,6 @@
 package com.mk.songr.Controller;
 
-import com.mk.songr.model.AlbumModel;
-import com.mk.songr.model.SongModel;
+import com.mk.songr.model.Album;
 import com.mk.songr.repository.AlbumRepository;
 import com.mk.songr.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +22,14 @@ public class AlbumController {
 
   @GetMapping("/albums")
   public String albums(Model model) {
-    List<AlbumModel> albums = albumsRepository.findAll();
+    List<Album> albums = albumsRepository.findAll();
     model.addAttribute("albums", albums);
     return "albums";
   }
 
   @PostMapping("/albums")
   public RedirectView postAlbum(String title, String artist, int songCount, String length, String imageUrl) {
-    AlbumModel album = new AlbumModel(title, artist, songCount, length, imageUrl);
+    Album album = new Album(title, artist, songCount, length, imageUrl);
     albumsRepository.save(album);
     return new RedirectView("/albums");
   }

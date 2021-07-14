@@ -38,24 +38,27 @@
             <p th:text="'Artist: ' + ${album.artist}"></p>
             <p th:text="'Number of Songs: ' + ${album.songCount}"></p>
             <p th:text="'Album Length: ' + ${album.length}"></p>
-            <a th:href="'song/' + ${album.id}" th:text="'Add New Song to ' + ${album.title}"></a>
           </div>
-          <ol>
-            <li th:each="song: ${album.songs}">
-              <p th:text="${song.title} + ': ' + ${song.length} + ' seconds'"></p>
-            </li>
-          </ol>
+
           <form action="/song/addSong/" method="POST">
             <label>Album Title:</label>
-            <input type="text" name="album" th:value="${album.title}" required readonly>
+            <input type="text" name="album" th:value="${album.title}" required readonly> <br>
             <label>Title:</label>
-            <input type="text" name="title" required>
+            <input type="text" name="title" required> <br>
             <label>Length:</label>
-            <input type="number" name="length" required>
+            <input type="number" name="length" required> <br>
             <label>Track Number:</label>
-            <input type="number" name="trackNumber" required>
+            <input type="number" name="trackNumber" required> <br>
             <input type="submit" name="submit">
           </form>
+
+          <div class="cardInfo">
+            <ol>
+              <li th:each="song: ${album.songs}">
+                <p th:text="${song.title} + ': ' + ${song.length} + ' seconds'"></p>
+              </li>
+            </ol>
+          </div>
         </div>
       </section>
     </section>

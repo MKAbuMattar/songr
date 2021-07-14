@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "song")
-public class SongModel {
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,13 @@ public class SongModel {
 
     @ManyToOne
     @JoinColumn(name = "album_id")
-    private AlbumModel album;
+    private Album album;
 
-    public SongModel() {
+    public Song() {
 
     }
 
-    public SongModel(String title, int length, int trackNumber, AlbumModel album) {
+    public Song(String title, int length, int trackNumber, Album album) {
         this.title = title;
         this.length = length;
         this.trackNumber = trackNumber;
@@ -57,11 +57,11 @@ public class SongModel {
         this.trackNumber = trackNumber;
     }
 
-    public AlbumModel getAlbum() {
+    public Album getAlbum() {
         return album;
     }
 
-    public void setAlbum(AlbumModel album) {
+    public void setAlbum(Album album) {
         this.album = album;
     }
 }
